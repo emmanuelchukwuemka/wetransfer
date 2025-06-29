@@ -43,6 +43,7 @@
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import smtplib
@@ -81,3 +82,8 @@ def submit():
         return jsonify({'status': 'success'})
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
