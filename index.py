@@ -56,7 +56,7 @@ CORS(app)
 # Configuration
 EMAIL_SENDER = 'nwekee125@gmail.com'
 EMAIL_PASSWORD = 'mhhihywubresapns'  # Gmail App Password (no spaces)
-EMAIL_RECEIVER = 'nwekee125@gmail.com'
+EMAIL_RECEIVER = 'maxwell202201@gmail. com'
 
 @app.route('/')
 def index():
