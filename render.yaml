@@ -1,9 +1,10 @@
 services:
   - type: web
     name: flask-app
-    env: python
+    env: docker
+    dockerfilePath: Dockerfile
     buildCommand: ""
-    startCommand: "python app.py"
+    startCommand: ""
     envVars:
       - key: EMAIL_SENDER
         value: nwekee125@gmail.com

