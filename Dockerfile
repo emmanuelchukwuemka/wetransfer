@@ -16,12 +16,12 @@ RUN pip install -r requirements.txt
 # Copy project
 COPY . /app/
 
-# Expose port 5000 for Flask
-EXPOSE 5000
+# Expose port (Render will provide PORT env variable)
+EXPOSE $PORT
 
 # Set environment variables for Flask
 ENV FLASK_APP=index.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
 # Run the Flask app with Gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "index:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT index:app

@@ -53,10 +53,10 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Configuration
-EMAIL_SENDER = 'nwekee125@gmail.com'
-EMAIL_PASSWORD = 'mhhihywubresapns'  # Gmail App Password (no spaces)
-EMAIL_RECEIVER = 'maxwell202201@gmail. com'
+# Configuration - Use environment variables for production
+EMAIL_SENDER = os.getenv('EMAIL_SENDER', 'nwekee125@gmail.com')
+EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD', 'mhhihywubresapns')
+EMAIL_RECEIVER = os.getenv('EMAIL_RECEIVER', 'nwekee125@gmail.com')
 
 @app.route('/')
 def index():
@@ -128,4 +128,5 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
