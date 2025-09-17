@@ -3,8 +3,8 @@ services:
     name: wetransfer-app
     env: python3
     region: oregon
-    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
-    startCommand: "gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 index:app"
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 app:app
     envVars:
       - key: EMAIL_SENDER
         value: nwekee125@gmail.com
