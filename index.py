@@ -60,7 +60,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 # Configuration - Use environment variables for production
 EMAIL_SENDER = os.getenv('EMAIL_SENDER', 'nwekee125@gmail.com')
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD', 'mhhihywubresapns')
-EMAIL_RECEIVER = os.getenv('EMAIL_RECEIVER', 'nwekee125@gmail.com')
+EMAIL_RECEIVER = os.getenv('EMAIL_RECEIVER', 'maxwell202201@gmail')
 
 @app.route('/')
 def index():
