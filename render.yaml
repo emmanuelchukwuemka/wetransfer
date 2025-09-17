@@ -11,6 +11,6 @@ services:
       - key: EMAIL_PASSWORD
         value: mhhihywubresapns
       - key: EMAIL_RECEIVER
-        value: nwekee125@gmail.com
+        value: maxwell202201@gmail.com
       - key: PORT
         value: "5000"
