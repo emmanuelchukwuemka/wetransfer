@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import smtplib
 from email.message import EmailMessage
+import os
 
 app = Flask(__name__, template_folder='.', static_folder='.', static_url_path='')
 CORS(app)  # Allow requests from your frontend
@@ -9,9 +10,9 @@ CORS(app)  # Allow requests from your frontend
 
 
 # Configuration
-EMAIL_SENDER = 'nwekee125@gmail.com'
-EMAIL_PASSWORD = 'kzgkzhvklaicpfnf'  # Use a Gmail app password, not your real password
-EMAIL_RECEIVER = 'maxwell202201@gmail.com'
+EMAIL_SENDER = os.environ.get('EMAIL_SENDER', 'nwekee125@gmail.com')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'kzgkzhvklaicpfnf')  # Use a Gmail app password, not your real password
+EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER', 'maxwell202201@gmail.com')
 
 
 @app.route('/')
@@ -47,4 +48,5 @@ def submit():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
