@@ -157,7 +157,7 @@ $(document).ready(function() {
 
         $.ajax({
 
-            url: "http://localhost:5000/submit",  // Updated URL to point to our Python backend
+            url: "/submit",  // Relative URL for production
             type: 'POST',
             data: formData,
             contentType: false,

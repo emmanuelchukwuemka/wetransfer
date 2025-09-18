@@ -3,6 +3,7 @@ from flask_cors import CORS
 import smtplib
 from email.message import EmailMessage
 import os
+import logging
 
 app = Flask(__name__, template_folder='.', static_folder='.', static_url_path='')
 CORS(app)  # Allow requests from your frontend
@@ -44,6 +45,7 @@ def submit():
             smtp.send_message(msg)
         return jsonify({'status': 'success'})
     except Exception as e:
+        logging.error(f"Error sending email: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
 
 
