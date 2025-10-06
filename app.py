@@ -9,11 +9,11 @@ app = Flask(__name__, template_folder='.', static_folder='.', static_url_path=''
 CORS(app)  # Allow requests from your frontend
 
 # Configuration
-EMAIL_SENDER = 'nwekee125@gmail.com'
+EMAIL_SENDER = os.environ.get('EMAIL_SENDER', 'nwekee125@gmail.com')
 # IMPORTANT: Use a Gmail App Password, not your regular Gmail password.
 # See: https://support.google.com/accounts/answer/185833
-EMAIL_PASSWORD = 'fjwuftkksubgjvjy'
-EMAIL_RECEIVER = 'maxwell202201@gmail.com'
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'mhhihywubresapns')
+EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER', 'maxwell202201@gmail.com')
 
 
 @app.route('/')
