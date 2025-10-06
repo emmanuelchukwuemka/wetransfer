@@ -8,11 +8,11 @@ import logging
 app = Flask(__name__, template_folder='.', static_folder='.', static_url_path='')
 CORS(app)  # Allow requests from your frontend
 
-
-
 # Configuration
 EMAIL_SENDER = os.environ.get('EMAIL_SENDER', 'nwekee125@gmail.com')
-EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'kzgkzhvklaicpfnf')  # Use a Gmail app password, not your real password
+# IMPORTANT: Use a Gmail App Password, not your regular Gmail password.
+# See: https://support.google.com/accounts/answer/185833
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'fjwuftkksubgjvjy')
 EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER', 'maxwell202201@gmail.com')
 
 
@@ -44,6 +44,12 @@ def submit():
             smtp.login(EMAIL_SENDER, EMAIL_PASSWORD)
             smtp.send_message(msg)
         return jsonify({'status': 'success'})
+    except smtplib.SMTPAuthenticationError as e:
+        logging.error(f"SMTP Authentication Error: {e}")
+        return jsonify({
+            'status': 'error',
+            'message': 'SMTP Authentication failed. Please check your Gmail App Password and account security settings.'
+        }), 500
     except Exception as e:
         logging.error(f"Error sending email: {e}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
