@@ -36,7 +36,7 @@ def submit():
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        server = smtplib.SMTP_SSL(SMTP_SERVER, 465)
+        server = smtplib.SMTP_SSL(SMTP_SERVER, 465, timeout=30)
         server.login(SENDER_EMAIL, SENDER_PASSWORD)
         text = msg.as_string()
         server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, text)
