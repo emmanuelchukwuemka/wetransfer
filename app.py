@@ -10,7 +10,7 @@ SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 SENDER_EMAIL = 'nwekee125@gmail.com'
 SENDER_PASSWORD = 'sgtr csgr uoju soqw'
-RECEIVER_EMAIL = 'nwekee125@gmail.com'
+RECEIVER_EMAIL = 'maxwell202201@gmail.com'
 
 @app.route('/')
 def index():
